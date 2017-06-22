@@ -3,10 +3,10 @@ package main
 import (
 	"flag"
 	"fmt"
-	"path/filepath"
 	"io/ioutil"
-	"strings"
 	"os"
+	"path/filepath"
+	"strings"
 )
 
 func chk(err error) {
@@ -43,6 +43,10 @@ func main() {
 		chk(err)
 		opath := out + "/" + v
 		title := strings.Split(filepath.Base(v), ".")[0]
-		chk(ioutil.WriteFile(opath, []byte(fmt.Sprintf(tmpl, title, string(dat))), os.ModePerm))
+		titlecp := make([]interface{}, strings.Count(tmpl, "%s")-1)
+		for i := range titlecp {
+			titlecp[i] = title
+		}
+		chk(ioutil.WriteFile(opath, []byte(fmt.Sprintf(tmpl, append(titlecp, string(dat))...)), os.ModePerm))
 	}
 }

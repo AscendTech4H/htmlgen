@@ -47,6 +47,9 @@ func main() {
 		for i := range titlecp {
 			titlecp[i] = title
 		}
-		chk(ioutil.WriteFile(opath, []byte(fmt.Sprintf(tmpl, append(titlecp, string(dat))...)), os.ModePerm))
+		pg := fmt.Sprintf(tmpl, append(titlecp, string(dat))...)
+		pg = strings.Replace(pg, "\n", "", -1)
+		pg = strings.Replace(pg, "\t", "", -1)
+		chk(ioutil.WriteFile(opath, []byte(pg), os.ModePerm))
 	}
 }

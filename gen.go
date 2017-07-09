@@ -50,6 +50,7 @@ func main() {
 		pg := fmt.Sprintf(tmpl, append(titlecp, string(dat))...)
 		pg = strings.Replace(pg, "\n", "", -1)
 		pg = strings.Replace(pg, "\t", "", -1)
+		pg = strings.Replace(pg, "\r", "", -1)
 		chk(ioutil.WriteFile(opath, []byte(pg), os.ModePerm))
 	}
 }

@@ -41,7 +41,7 @@ func main() {
 	for _, v := range files {
 		dat, err := ioutil.ReadFile(v)
 		chk(err)
-		opath := out + "/" + filepath.Base(v)
+		opath := out + "/" + filepath.Base(v) + ".html"
 		title := strings.Split(filepath.Base(v), ".")[0]
 		titlecp := make([]interface{}, strings.Count(tmpl, "%s")-1)
 		for i := range titlecp {
